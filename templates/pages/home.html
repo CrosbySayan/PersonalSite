@@ -1,3 +1,60 @@
 <!DOCTYPE html>
-<h1> Hello World </h1>
-<h2> This is my personal website made with Go </h2>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Title</title>
+  <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <style>
+    .window {
+      background-color: aqua;
+      width: 200px;
+      height: 200px;
+      position: absolute;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="window" onmousedown="startDrag(event)"></div>
+  <script>
+    let draggedElement = null;
+    let offsetX = 0;
+    let offsetY = 0;
+
+    function startDrag(e) {
+      //Storing the element currently being dragged
+      draggedElement = e.target
+      offsetX = e.clientX - draggedElement.offsetLeft;
+      offsetY = e.clientY - draggedElement.offsetTop;
+
+      document.addEventListener('mousemove', drag);
+      document.addEventListener('mouseup', stopDrag);
+      //Prevent text from being selected
+      e.preventDefault();
+    }
+    function drag(e) {
+      if (!draggedElement) return;
+      
+      // Calculate new position
+      let x = e.clientX - offsetX;
+      let y = e.clientY - offsetY;
+      
+      // Update element position
+      draggedElement.style.left = x + 'px';
+      draggedElement.style.top = y + 'px';
+    }
+
+    function stopDrag() {
+      // Remove event listeners
+      document.removeEventListener('mousemove', drag);
+      document.removeEventListener('mouseup', stopDrag);
+      
+      // Clear the dragged element
+      draggedElement = null;
+    }
+  </script>
+</body>
+
+</html>
