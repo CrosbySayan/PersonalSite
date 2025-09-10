@@ -97,7 +97,6 @@
 
     .window-content {
       padding: 20px;
-      background-color: #ecf0f1;
     }
 
     .window.active {}
@@ -115,11 +114,11 @@
 </head>
 
 <body>
-  <div class="control-panel">
-    <button class="spawn-button" hx-post="/window/create" hx-target=".window-container" hx-swap="beforeend">
-      Spawn New Window
-    </button>
-  </div>
+  <!-- <div class="control-panel"> -->
+  <!--   <button class="spawn-button" hx-post="/window/create" hx-target=".window-container" hx-swap="beforeend"> -->
+  <!--     Spawn New Window -->
+  <!--   </button> -->
+  <!-- </div> -->
 
   <div class="window-container">
     {{range .Windows}}
@@ -141,11 +140,16 @@
     });
 
     function startDrag(e) {
-      // Find the parent window element
       draggedElement = e.target.closest('.window');
       if (!draggedElement) return;
 
       const rect = draggedElement.getBoundingClientRect();
+
+      // Switch to pixel positioning for drag
+      draggedElement.style.left = rect.left + 'px';
+      draggedElement.style.top = rect.top + 'px';
+      draggedElement.style.transform = 'none';  // remove the translate
+
       offsetX = e.clientX - rect.left;
       offsetY = e.clientY - rect.top;
 
@@ -156,7 +160,7 @@
       highestZIndex++;
       draggedElement.style.zIndex = highestZIndex;
 
-      // Add active class
+      // Active window class
       document.querySelectorAll('.window').forEach(w => w.classList.remove('active'));
       draggedElement.classList.add('active');
 
