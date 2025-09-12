@@ -17,8 +17,7 @@
 
 
     .grid-container>div {
-      /* Debug Grid */
-      /*border: 2px solid red; */
+      border: 2px solid red;
       text-align: center;
       padding: 20px 5px;
       font-size: 16px;
@@ -47,7 +46,6 @@
     }
 
     .text-items {
-      padding-bottom: 5px;
       display: flex;
       justify-content: space-between;
       font-weight: bold;
@@ -66,10 +64,6 @@
       border-right: 4px solid var(--outline-color);
     }
 
-    .storage-segment:last-child {
-      border-right: none;
-    }
-
     .item3 {
       display: flex !important;
       align-items: flex-start !important;
@@ -84,9 +78,10 @@
     .legend {
       align-items: flex-start !important;
       padding: 5px 10px 5px 5px !important;
+      gap 5px !important;
       /* Center horizontally */
       text-align: center !important;
-      justify-content: space-between;
+
       display: flex !important;
       font-size: 14px;
       flex-wrap: wrap;
@@ -95,14 +90,14 @@
     .legend-item {
       display: flex;
       align-items: center;
-      gap: 10px !important;
+      gap: 10px;
     }
 
     .legend-color {
-      width: 18px;
-      height: 18px;
-      border: 4px solid var(--outline-color);
-      border-radius: 5px;
+      width: 20px;
+      height: 20px;
+      border: 3px solid var(--outline-color);
+      border-radius: 4px;
     }
   </style>
 </head>
@@ -132,27 +127,17 @@
       <div class="storage-bar">
         <div class="storage-segment" style="width: 30%; background-color: #FFCBE1;"></div>
         <div class="storage-segment" style="width: 40%; background-color: #FFDAB4;"></div>
-        <div class="storage-segment" style="width: 10%; background-color: #BCD8EC;"></div>
-        <div class="storage-segment" style="width: 20%; background-color: #DCCCEC;"></div>
       </div>
     </div>
     <div class="item3">2004 SSD</div>
     <div class="legend">
       <div class="legend-item">
         <div class="legend-color" style="background-color: #FFCBE1;"></div>
-        <span>C/C++</span>
+        <span>C</span>
       </div>
       <div class="legend-item">
         <div class="legend-color" style="background-color: #FFDAB4;"></div>
         <span>Rust</span>
-      </div>
-      <div class="legend-item">
-        <div class="legend-color" style="background-color: #BCD8EC;"></div>
-        <span>Go</span>
-      </div>
-      <div class="legend-item">
-        <div class="legend-color" style="background-color: #DCCCEC;"></div>
-        <span>Other</span>
       </div>
     </div>
   </div>

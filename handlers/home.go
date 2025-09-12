@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"bytes"
 	"fmt"
 	"html/template"
 	"log"
@@ -153,6 +154,13 @@ func (w *Window) StyleString() template.CSS {
 var windows = make([]*Window, 2)
 
 func makeWindows() {
+	storageTemplate := template.Must(template.ParseFiles("./templates/pages/partials/storage-content.html"))
+
+	var storageContent bytes.Buffer
+	if err := storageTemplate.ExecuteTemplate(&storageContent, "storage", nil); err != nil {
+		log.Printf("Error executing storage template: %v", err)
+	}
+
 	windows[0] = &Window{
 		Title: "Main Window",
 		ID:    "0",
@@ -187,11 +195,11 @@ func makeWindows() {
 			Height: Percent(30),
 		},
 		Constraints: Constraints{
-			MinWidth:  300,
+			MinWidth:  600,
 			MinHeight: 200,
 		},
 		ZIndex:  1001,
-		Content: template.HTML("<div>Storage content</div>"),
+		Content: template.HTML(storageContent.String()),
 	}
 }
 
