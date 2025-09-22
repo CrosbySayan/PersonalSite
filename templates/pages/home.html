@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Window Manager</title>
   <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+
   <style>
     body {
       margin: 0;
@@ -27,6 +28,7 @@
       height: 100vh;
     }
 
+
     .window {
       position: absolute;
       background-color: #FFFEE8;
@@ -44,9 +46,8 @@
 
     .window.dragging {
       cursor: grabbing !important;
-      box-shadow: 10px 15px var(--outline-color);
+      box-shadow: 17px 25px var(--outline-color);
       /*box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);*/
-      transition: box-shadow 0.1s ease;
     }
 
     .window-titlebar {
@@ -106,6 +107,15 @@
 
     .window.active {}
 
+    .folder {
+      position: absolute;
+      border: 4px solid red;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
     /* Loading spinner for HTMX */
     .htmx-request .spawn-button {
       opacity: 0.6;
@@ -115,21 +125,19 @@
     .htmx-request .spawn-button::after {
       content: "...";
     }
+
+    #windows-area {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    #windows-area>* {
+      pointer-events: auto;
+    }
   </style>
-</head>
 
-<body>
-  <!-- <div class="control-panel"> -->
-  <!--   <button class="spawn-button" hx-post="/window/create" hx-target=".window-container" hx-swap="beforeend"> -->
-  <!--     Spawn New Window -->
-  <!--   </button> -->
-  <!-- </div> -->
-
-  <div class="window-container">
-    {{range .Windows}}
-    {{template "window" .}}
-    {{end}}
-  </div>
 
   <script>
     let draggedElement = null;
@@ -143,6 +151,8 @@
     document.addEventListener('mousedown', function (e) {
       if (e.target.closest('.window-titlebar')) {
         startDrag(e);
+      } else if (e.target.closest('.folder')) {
+        console.log("test")
       }
     });
 
@@ -256,6 +266,24 @@
       }
     });
   </script>
+</head>
+
+<body>
+
+  <div class="window-container" , id="main-window-container">
+    <div id="windows-area">
+      {{range .Windows}}
+      {{template "window" .}}
+      {{end}}
+    </div>
+    <div class="desktop-icons">
+      <!--Add new icon apps here-->
+      {{range .Folders}}
+      {{template "folder" .}}
+      {{end}}
+    </div>
+  </div>
+
 </body>
 
 </html>

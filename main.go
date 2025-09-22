@@ -14,6 +14,7 @@ func main() {
 	fmt.Printf("Server Starting on http://localhost%s\n", port)
 
 	http.HandleFunc("/", handlers.HomeHandler)
+	http.HandleFunc("/test", handlers.SpawnWindowHandler)
 	// http.HandleFunc("/window/create", CreateWindowHandler)
 	// http.HandleFunc("/window/", DeleteWindowHandler)
 

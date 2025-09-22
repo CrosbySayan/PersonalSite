@@ -1,0 +1,17 @@
+{{define "folder"}}
+<div class="folder" style="{{.StyleString}}" hx-post="/test" hx-target="#main-window-container" hx-swap="beforeend"
+  hx-on::before-request="console.log('HTMX request starting')"
+  hx-on::after-request="console.log('HTMX request complete')"
+  hx-on::htmx:config-request="console.log('Config:', event.detail)" onclick="console.log('Folder clicked!')">
+  <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 206 193" fill="none"
+    preserveAspectRatio="xMidYMid meet">
+    <rect x="27" y="35.9999" width="165" height="156" rx="10" fill="#262626" />
+    <rect x="20.7408" y="87.8453" width="110.951" height="141.211" transform="rotate(-47.4437 20.7408 87.8453)"
+      fill="white" stroke="#262626" stroke-width="8" />
+    <path
+      d="M160.282 90.9999H11.7524C7.26578 90.9999 3.93749 95.1614 4.9235 99.5383L23.8468 183.538C24.5661 186.732 27.4024 189 30.6756 189H180.151C184.668 189 188.003 184.785 186.963 180.389L167.094 96.3886C166.347 93.2305 163.527 90.9999 160.282 90.9999Z"
+      fill="#A2D5EF" stroke="#262626" stroke-width="8" />
+  </svg>
+  <div style="text-align: center; margin-top: 5px; color: #262626; font-weight: 500;">{{.Title}}</div>
+</div>
+{{end}}
