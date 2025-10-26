@@ -26,6 +26,7 @@
       position: relative;
       width: 100%;
       height: 100vh;
+      overflow: hidden;
     }
 
 
@@ -42,6 +43,9 @@
       will-change: transform;
       /* Smooth transitions for the tilt effect */
       transition: transform 0.15s ease-out, box-shadow 0.1s ease;
+
+      display: flex;
+      flex-direction: column;
     }
 
     .window.dragging {
@@ -60,6 +64,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      flex-shrink: 0;
     }
 
     .window-titlebar:hover {
@@ -101,19 +106,31 @@
     .window-content {
       padding: 20px;
       flex: 1;
-      overflow: auto;
       box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      overflow: scroll;
     }
+
+    .window-content:has(.explorer-container) {
+      overflow: hidden;
+      padding: 0;
+    }
+
 
     .window.active {}
 
     .folder {
       position: absolute;
-      border: 4px solid red;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .folder:hover {
+      transform: scale(1.1);
     }
 
     /* Loading spinner for HTMX */
@@ -147,6 +164,19 @@
     let dragVelocityX = 0;
     let velocityHistory = [];
     let currentRotation = 0;
+
+    document.addEventListener('DOMContentLoaded', function () {
+      // Convert all windows to pixel positioning on load
+      document.querySelectorAll('.window').forEach(window => {
+        const rect = window.getBoundingClientRect();
+        window.style.transform = 'none';
+        window.style.left = rect.left + 'px';
+        window.style.top = rect.top + 'px';
+        window.style.right = 'auto';
+        window.style.bottom = 'auto';
+      });
+    });
+
     // Use event delegation for dynamically added windows
     document.addEventListener('mousedown', function (e) {
       if (e.target.closest('.window-titlebar')) {
@@ -264,6 +294,11 @@
         highestZIndex++;
         window.style.zIndex = highestZIndex;
       }
+    });
+
+    document.body.addEventListener('htmx:configRequest', function (evt) {
+      evt.detail.headers['X-Highest-Z-Index'] = highestZIndex;
+      highestZIndex++;
     });
   </script>
 </head>

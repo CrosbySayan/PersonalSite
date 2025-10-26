@@ -1,6 +1,6 @@
 {{define "folder"}}
-<div class="folder" style="{{.StyleString}}" hx-post="/test" hx-target="#main-window-container" hx-swap="beforeend"
-  hx-on::before-request="console.log('HTMX request starting')"
+<div class="folder" style="{{.StyleString}}" hx-post="/window/add" hx-target="#main-window-container"
+  hx-swap="beforeend" hx-on::before-request="console.log('HTMX request starting')"
   hx-on::after-request="console.log('HTMX request complete')"
   hx-on::htmx:config-request="console.log('Config:', event.detail)" onclick="console.log('Folder clicked!')">
   <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 206 193" fill="none"

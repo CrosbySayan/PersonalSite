@@ -26,7 +26,7 @@ func initializeDesktop() {
 
 	windows["0"] = &Window{
 		Title: "Main Window",
-		ID:    "0",
+		ID:    "main-window",
 		Position: Position{
 			X:      Px(50),
 			Y:      Px(50),
@@ -48,7 +48,7 @@ func initializeDesktop() {
 
 	windows["1"] = &Window{
 		Title: "Storage",
-		ID:    "1",
+		ID:    "storage-window",
 		Position: Position{
 			X:      Px(100),
 			Y:      Px(100),

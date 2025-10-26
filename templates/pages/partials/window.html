@@ -1,8 +1,8 @@
 {{define "window"}}
-<div class="window" style="{{.StyleString}}">
+<div class="window" id="{{.ID}}" style="{{.StyleString}}">
   <div class="window-titlebar">
     <div class="window-controls">
-      <div class="window-close" hx-delete="/window/{{.ID}}" hx-target="#window-{{.ID}}" hx-swap="outerHTML">
+      <div class="window-close" hx-delete="window/delete/{{.ID}}" hx-target="#{{.ID}}" hx-swap="outerHTML">
       </div>
     </div>
     <div class="window-title">{{.Title}}</div>
