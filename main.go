@@ -2,16 +2,22 @@ package main
 
 import (
 	"fmt"
-	//"html/template"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/CrosbySayan/PersonalSite/handlers"
 )
 
 func main() {
-	port := ":8080"
-	fmt.Printf("Server Starting on http://localhost%s\n", port)
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+
+	fmt.Printf("Server Starting on port %s\n", port)
+
+	http.Handle("/photos/", http.StripPrefix("/photos/", http.FileServer(http.Dir("photos"))))
 
 	http.HandleFunc("/", handlers.HomeHandler)
 	http.HandleFunc("/window/add", handlers.SpawnWindowHandler)

@@ -1,0 +1,236 @@
+/* Container for the lava lamp effect */
+    .lava-lamp-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      pointer-events: none; /* Allows clicking through to elements below */
+      z-index: 1;
+      opacity: 0.7; /* Adjust opacity for subtlety */
+      overflow: hidden;
+    }
+
+    /* Individual blob elements */
+    .lava-blob {
+      position: absolute;
+      border-radius: 50%;
+    }
+
+    /* Blob 1 - Large, slow-moving */
+    .blob-1 {
+      width: 600px;
+      height: 600px;
+      background: #40E0D0; /* Turquoise */
+      left: -300px;
+      top: -300px;
+      animation: 
+        roam-1 80s infinite ease-in-out,
+        morph-1 30s infinite ease-in-out;
+    }
+
+    /* Blob 2 - Medium, faster */
+    .blob-2 {
+      width: 400px;
+      height: 400px;
+      background: #40E0D0; /* Turquoise */
+      right: -200px;
+      top: 50%;
+      animation: 
+        roam-2 70s infinite ease-in-out,
+        morph-2 25s infinite ease-in-out;
+    }
+
+    /* Blob 3 - Small, dynamic */
+    .blob-3 {
+      width: 300px;
+      height: 300px;
+      background: #40E0D0; /* Turquoise */
+      left: 50%;
+      top: -150px;
+      animation: 
+        roam-3 60s infinite ease-in-out,
+        morph-3 20s infinite ease-in-out;
+    }
+
+    /* Blob 4 - Medium-large, slow */
+    .blob-4 {
+      width: 500px;
+      height: 500px;
+      background: #40E0D0; /* Turquoise */
+      left: 20%;
+      bottom: -250px;
+      animation: 
+        roam-4 90s infinite ease-in-out,
+        morph-4 40s infinite ease-in-out;
+    }
+
+    /* Blob 5 - Small, fast */
+    .blob-5 {
+      width: 250px;
+      height: 250px;
+      background: #40E0D0; /* Turquoise */
+      right: 20%;
+      top: 40%;
+      animation: 
+        roam-5 50s infinite ease-in-out,
+        morph-5 15s infinite ease-in-out;
+    }
+
+    /* Roaming animations - full screen movement patterns */
+    @keyframes roam-1 {
+      0%, 100% {
+        transform: translate(0, 0) rotate(0deg);
+      }
+      25% {
+        transform: translate(400px, 300px) rotate(90deg);
+      }
+      50% {
+        transform: translate(200px, 600px) rotate(180deg);
+      }
+      75% {
+        transform: translate(500px, 400px) rotate(270deg);
+      }
+    }
+
+    @keyframes roam-2 {
+      0%, 100% {
+        transform: translate(0, 0) rotate(0deg);
+      }
+      20% {
+        transform: translate(-300px, -200px) rotate(72deg);
+      }
+      40% {
+        transform: translate(-400px, 200px) rotate(144deg);
+      }
+      60% {
+        transform: translate(-200px, -300px) rotate(216deg);
+      }
+      80% {
+        transform: translate(-100px, 100px) rotate(288deg);
+      }
+    }
+
+    @keyframes roam-3 {
+      0%, 100% {
+        transform: translate(0, 0) rotate(0deg);
+      }
+      33% {
+        transform: translate(-200px, 500px) rotate(120deg);
+      }
+      66% {
+        transform: translate(100px, 300px) rotate(240deg);
+      }
+    }
+
+    @keyframes roam-4 {
+      0%, 100% {
+        transform: translate(0, 0) rotate(0deg);
+      }
+      25% {
+        transform: translate(300px, -400px) rotate(90deg);
+      }
+      50% {
+        transform: translate(100px, -600px) rotate(180deg);
+      }
+      75% {
+        transform: translate(400px, -300px) rotate(270deg);
+      }
+    }
+
+    @keyframes roam-5 {
+      0%, 100% {
+        transform: translate(0, 0) rotate(0deg);
+      }
+      20% {
+        transform: translate(-150px, -100px) rotate(72deg);
+      }
+      40% {
+        transform: translate(200px, -200px) rotate(144deg);
+      }
+      60% {
+        transform: translate(-100px, 150px) rotate(216deg);
+      }
+      80% {
+        transform: translate(150px, 100px) rotate(288deg);
+      }
+    }
+
+    /* Morph animations - shape distortion */
+    @keyframes morph-1 {
+      0%, 100% {
+        border-radius: 63% 37% 54% 46% / 55% 48% 52% 45%;
+      }
+      20% {
+        border-radius: 40% 60% 60% 40% / 60% 30% 70% 40%;
+      }
+      40% {
+        border-radius: 45% 55% 30% 70% / 30% 60% 40% 70%;
+      }
+      60% {
+        border-radius: 60% 40% 30% 70% / 50% 60% 40% 50%;
+      }
+      80% {
+        border-radius: 35% 65% 60% 40% / 70% 30% 70% 30%;
+      }
+    }
+
+    @keyframes morph-2 {
+      0%, 100% {
+        border-radius: 70% 30% 46% 54% / 30% 29% 71% 70%;
+      }
+      25% {
+        border-radius: 44% 56% 70% 30% / 69% 46% 54% 31%;
+      }
+      50% {
+        border-radius: 56% 44% 33% 67% / 45% 67% 33% 55%;
+      }
+      75% {
+        border-radius: 38% 62% 56% 44% / 62% 38% 62% 38%;
+      }
+    }
+
+    @keyframes morph-3 {
+      0%, 100% {
+        border-radius: 38% 62% 63% 37% / 41% 44% 56% 59%;
+      }
+      33% {
+        border-radius: 62% 38% 43% 57% / 72% 28% 72% 28%;
+      }
+      66% {
+        border-radius: 51% 49% 70% 30% / 61% 39% 61% 39%;
+      }
+    }
+
+    @keyframes morph-4 {
+      0%, 100% {
+        border-radius: 36% 64% 27% 73% / 48% 27% 73% 52%;
+      }
+      20% {
+        border-radius: 73% 27% 59% 41% / 57% 59% 41% 43%;
+      }
+      40% {
+        border-radius: 46% 54% 50% 50% / 35% 61% 39% 65%;
+      }
+      60% {
+        border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%;
+      }
+      80% {
+        border-radius: 29% 71% 56% 44% / 69% 56% 44% 31%;
+      }
+    }
+
+    @keyframes morph-5 {
+      0%, 100% {
+        border-radius: 41% 59% 41% 59% / 41% 59% 41% 59%;
+      }
+      25% {
+        border-radius: 69% 31% 62% 38% / 47% 72% 28% 53%;
+      }
+      50% {
+        border-radius: 34% 66% 25% 75% / 63% 37% 63% 37%;
+      }
+      75% {
+        border-radius: 58% 42% 72% 28% / 42% 58% 42% 58%;
+      }
+    }

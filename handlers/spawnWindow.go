@@ -48,7 +48,7 @@ func SpawnWindowHandler(w http.ResponseWriter, r *http.Request) {
 	// Generate unique ID
 	windowID := fmt.Sprintf("window-%d", time.Now().UnixNano())
 
-	// windows[windowID] = newWindow
+	highestZIndex := getHighestZIndex(r) // default fallback
 
 	// Create window data for template only
 	newWindow := &Window{
@@ -69,7 +69,7 @@ func SpawnWindowHandler(w http.ResponseWriter, r *http.Request) {
 			// MaxWidth:  1200,
 			// MaxHeight: 900,
 		},
-		ZIndex:  1000, // Fixed z-index, client will manage
+		ZIndex:  highestZIndex, // Fixed z-index, client will manage
 		Content: template.HTML(storageContent.String()),
 	}
 
@@ -131,6 +131,9 @@ func AddPostHandler(w http.ResponseWriter, r *http.Request) {
 
 	windowID := fmt.Sprintf("window-%d", time.Now().UnixNano())
 
+	// Get the highest z-index from the client
+	highestZIndex := getHighestZIndex(r) // default fallback
+
 	blogPost := &Window{
 		Title: "Blog Posts",
 		ID:    windowID,
@@ -149,7 +152,7 @@ func AddPostHandler(w http.ResponseWriter, r *http.Request) {
 			// MaxWidth:  1200,
 			// MaxHeight: 900,
 		},
-		ZIndex:  1000, // Fixed z-index, client will manage
+		ZIndex:  highestZIndex, // Fixed z-index, client will manage
 		Content: template.HTML(htmlContent),
 	}
 

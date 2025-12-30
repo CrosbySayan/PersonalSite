@@ -19,9 +19,15 @@ func init() {
 func initializeDesktop() {
 	// Initialize windows
 	storageTemplate := template.Must(template.ParseFiles("./templates/pages/partials/storage-content.html"))
+	splashScreenTempl := template.Must(template.ParseFiles("./templates/pages/splash.html"))
 	var storageContent bytes.Buffer
 	if err := storageTemplate.ExecuteTemplate(&storageContent, "storage", nil); err != nil {
 		log.Printf("Error executing storage template: %v", err)
+	}
+
+	var splashContent bytes.Buffer
+	if err := splashScreenTempl.Execute(&splashContent, nil); err != nil {
+		log.Printf("Error executing splash template: %v", err)
 	}
 
 	windows["0"] = &Window{
@@ -42,8 +48,8 @@ func initializeDesktop() {
 			MaxWidth:  1200,
 			MaxHeight: 900,
 		},
-		ZIndex:  1000,
-		Content: template.HTML("<h1>Welcome!</h1>"),
+		ZIndex:  998,
+		Content: template.HTML(splashContent.String()),
 	}
 
 	windows["1"] = &Window{
@@ -62,24 +68,27 @@ func initializeDesktop() {
 			MinWidth:  600,
 			MinHeight: 200,
 		},
-		ZIndex:  1001,
+		ZIndex:  999,
 		Content: template.HTML(storageContent.String()),
 	}
 
 	// Initialize folders
 	folders[0] = &Folder{
-		Title: "Test",
+		Title: "Blogs",
 		Position: Position{
 			X:      Px(50),
 			Y:      Px(50),
 			Anchor: "top-left",
 		},
 		Size: Size{
-			Width:  Percent(12),
-			Height: Percent(12),
+			Width:  Percent(15),
+			Height: Percent(15),
 		},
-		Constraints: Constraints{},
-		ZIndex:      999,
+		Constraints: Constraints{
+			MinWidth:  100,
+			MinHeight: 100,
+		},
+		ZIndex: 1,
 	}
 }
 

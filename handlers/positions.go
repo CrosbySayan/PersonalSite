@@ -3,6 +3,9 @@ package handlers
 import (
 	"fmt"
 	"html/template"
+	"log"
+	"net/http"
+	"strconv"
 	"strings"
 )
 
@@ -163,4 +166,20 @@ type Folder struct {
 	Constraints Constraints
 	ZIndex      int
 	// Hold some data about what is inside you
+}
+
+func getHighestZIndex(r *http.Request) int {
+	highestZIndex := 1000 // default fallback
+	if zIndexHeader := r.Header.Get("X-Highest-Z-Index"); zIndexHeader != "" {
+		if parsed, err := strconv.Atoi(zIndexHeader); err == nil {
+			// The client sends the current highest, so we add 1 for the new window
+			highestZIndex = parsed + 1
+			log.Printf("Received z-index from client: %d, using: %d", parsed, highestZIndex)
+		} else {
+			log.Printf("Failed to parse X-Highest-Z-Index header: %v", err)
+		}
+	} else {
+		log.Printf("No X-Highest-Z-Index header found, using default: %d", highestZIndex)
+	}
+	return highestZIndex
 }
