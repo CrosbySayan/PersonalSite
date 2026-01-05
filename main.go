@@ -27,5 +27,5 @@ func main() {
 	// http.HandleFunc("/window/create", CreateWindowHandler)
 	// http.HandleFunc("/window/", DeleteWindowHandler)
 
-	log.Fatal(http.ListenAndServe(port, nil))
+	log.Fatal(http.ListenAndServe(":"+port, nil))
 }
